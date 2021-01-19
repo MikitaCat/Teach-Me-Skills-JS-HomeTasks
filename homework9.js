@@ -33,8 +33,23 @@ HouseBuilder.prototype.calcArea = function(){
 //Добавьте также метод для проверки того что не выполнен план по площади checkAreaFail,
 //которая выполняет alert("План по стройке не выполнен выполнен"). Попробуйте вызвать:
 
+
+
 //askArea(firstHouse.calcArea, firstHouse.checkAreaSuccessfully, firstHouse.checkAreaFail)
 //askArea(secondHouse.calcArea, secondHouse.checkAreaSuccessfully, secondHouse.checkAreaFail)
 
 //Будет ли такой код работать корректно? 
 //Если нет то используйте известные вам механизмы привязки чтобы решить эту задачу. 
+
+function askArea(result, resolve, reject) {
+    let area = result();
+    if (area >= "120") resolve();
+    else reject();
+}
+
+HouseBuilder.prototype.checkAreaSuccessfully = () => alert("План по постройке выполнен");
+HouseBuilder.prototype.checkAreaFail = () => alert("План по постройке не выполнен");
+
+askArea(firstHouse.calcArea.bind(firstHouse), firstHouse.checkAreaSuccessfully.bind(firstHouse), firstHouse.checkAreaFail.bind(firstHouse));
+askArea(secondHouse.calcArea.bind(secondHouse), secondHouse.checkAreaSuccessfully.bind(secondHouse), secondHouse.checkAreaFail.bind(secondHouse));
+
